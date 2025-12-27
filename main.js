@@ -11,28 +11,22 @@ let isScormConnected = false;
  * [cite_start]מבצע את האתחול הראשוני של המערכת מול ה-Wrapper [cite: 52]
  */
 document.addEventListener('DOMContentLoaded', function () {
-    
-    [cite_start]// 1. אתחול ה-SCORM באמצעות ה-Wrapper שנלמד (pipwerks) [cite: 52]
+    // 1. אתחול ה-SCORM
     if (window.pipwerks && pipwerks.SCORM) {
-        
-        [cite_start]// פונקציית init מחפשת את ה-API של ה-Moodle ומנסה להתחבר [cite: 52]
         isScormConnected = pipwerks.SCORM.init();
-        
         if (isScormConnected) {
-            console.log("SCORM Connected: החיבור למערכת הצליח");
-            
-            [cite_start]// שליפת שם הסטודנט מה-LMS והצגתו בדף [cite: 52]
+            console.log("SCORM Connected");
             fetchLearnerName(); 
-        } else {
-            [cite_start]// הודעה שמופיעה כאשר הקובץ מורץ מקומית ולא בתוך Moodle [cite: 52]
-            console.warn("SCORM failed: החיבור נכשל או שמופעל לוקאלית");
         }
     }
 
-    [cite_start]// 2. הגדרת מאזין ללחיצה על כפתור שליחת הטופס [cite: 59]
+    // 2. הגדרת המאזין ללחצן - חייב להיות מחוץ ל-if של ה-SCORM
     const submitBtn = document.getElementById('btn-submit-lms');
-    if(submitBtn) {
+    if (submitBtn) {
         submitBtn.addEventListener('click', handleFormSubmit);
+        console.log("Button listener attached!"); // בדוק בקונסול אם זה מודפס
+    } else {
+        console.error("Button not found! Check the ID in HTML.");
     }
 });
 
