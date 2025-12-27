@@ -1,0 +1,205 @@
+/* =========================================
+   MinTalk - styles.css
+   עיצוב רספונסיבי מותאם אישית לפי הנחיות המטלה
+   ========================================= */
+
+/* --- 0) הגדרות בסיס ומשתנים (Root) --- */
+:root {
+  /* גודל פונט בסיסי למובייל - Mobile First  */
+  font-size: 14px;
+
+  /* משתני צבעים לפי אפיון המותג */
+  --bg-light: #FEFAEE;
+  --bg-strong: #6F0E17;
+  --text-strong: #6F0E17;
+  --text-light: #FEFAEE;
+}
+
+/* הגדלת הפונט הבסיסי למסכי מחשב/טאבלט (Responsive Typography) */
+@media (min-width: 768px) {
+  :root { font-size: 18px; }
+}
+
+/* מניעת גלילה אופקית מיותרת */
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Assistant', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-strong);
+  direction: rtl; /* יישור לימין לעברית */
+  margin: 0;
+}
+
+/* עדכון ה-Navbar שיהיה דבוק למעלה */
+.navbar-custom {
+    background-color: var(--bg-strong);
+    color: var(--text-light);
+    padding-block: 0.75rem;
+    position: sticky; /* גורם לתפריט להישאר למעלה */
+    top: 0;
+    z-index: 1000; /* מוודא שהתפריט יהיה מעל שאר האלמנטים בגלילה */
+}
+
+.navbar-custom .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+.navbar-brand.brand-title {
+  color: var(--text-light);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+/* עיצוב המבורגר במובייל (Bootstrap Toggler)  */
+.navbar-toggler { border-color: var(--text-light); }
+.navbar-toggler-icon { filter: invert(90%); }
+
+.navbar-nav .nav-link {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* הדגשת הקישור הפעיל או ריחוף */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+  color: var(--text-light);
+  text-decoration: underline;
+}
+
+/* התאמה למובייל שההמבורגר יישאר בתוך הנאב הקבוע */
+@media (max-width: 991.98px) {
+    .navbar-custom .navbar-toggler {
+        position: absolute !important; 
+        top: 0.75rem;
+        right: 1rem;
+    }
+}
+
+/* כפתור X לסגירת התפריט במובייל */
+.nav-close {
+  display: none; /* מוסתר כברירת מחדל */
+  background: transparent;
+  border: 0;
+  color: #FEFAEE;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+  #navbarNav.show .nav-close {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4000;
+  }
+}
+
+/* --- 2) אזור כותרת (Hero Section) עם תמונת רקע --- */
+.hero-section {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw); /* מתיחה לכל רוחב המסך (Full-bleed) */
+  position: relative;
+  overflow: hidden;
+  min-height: 55vh;
+  padding: 3rem 1rem 2rem;
+  background-image: url("assets/header-bg.jpg.jpg"); /* תמונת ה-Header  */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FEFAEE;
+  margin-bottom: 2rem;
+}
+
+/* הסתרת ה-img מה-HTML כדי להשתמש ב-Background CSS */
+.hero-section > img { display: none; }
+
+/* מיקום כותרות ושורת חיפוש בפינות לפי האפיון שלך */
+.hero-section h1 { position: absolute; top: 1.25rem; right: 1.25rem; }
+.hero-section h2 { position: absolute; top: 5.25rem; right: 1.25rem; }
+
+/* 1. תפריט ניווט קבוע למעלה */
+.navbar-custom.sticky-top {
+    position: sticky !important;
+    top: 0;
+    width: 100%;
+    z-index: 2000; /* מבטיח שהתפריט יהיה מעל התוכן הנגלל */
+}
+
+/* 2. פינות מעוגלות לשדה החיפוש והכפתור */
+.hero-section .form-control {
+    border-radius: 50px 0 0 50px !important; /* צד ימין מעוגל (בגלל RTL) */
+    padding-right: 20px;
+}
+
+.hero-section .btn {
+    border-radius: 0 50px 50px 0 !important; /* צד שמאל מעוגל */
+    padding-inline: 25px;
+    background-color: var(--bg-strong);
+}
+
+/* ביטול המרווח המובנה של Bootstrap בין השדה לכפתור אם צריך */
+.hero-section .input-group {
+    gap: 10px; 
+}
+
+/* --- 3) כרטיסי תוכן (7 יחידות) --- */
+/* מובייל: כרטיסים אחד מתחת לשני [cite: 1437] */
+#contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background-color: var(--bg-strong);
+  color: var(--text-light);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* דסקטופ: 7 כרטיסים בשורה אחת (לפי חישוב מתמטי מדויק) [cite: 1437] */
+@media (min-width: 992px) {
+  #contentContainer {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  #contentContainer .content-unit {
+    /* חישוב המבטיח ש-7 יחידות ייכנסו בשורה אחת בדיוק */
+    flex: 0 0 calc((100% - (0.5rem * 6)) / 7);
+    max-width: calc((100% - (0.5rem * 6)) / 7);
+  }
+}
+
+/* --- 4) אזור LMS ואיסוף נתונים --- */
+.lms-section {
+  background-color: var(--bg-light);
+  padding: 2rem 1.25rem;
+  margin-block: 3rem;
+}
+
+/* הדגשת טקסט עזר לטובת נגישות  */
+.lms-section .text-muted {
+  color: #5a0b13 !important;
+  font-weight: 700;
+}
+
+/* עיצוב כפתורים עם אפקט Hover */
+.btn-danger {
+  background-color: var(--bg-strong);
+  border-color: var(--bg-strong);
+}
+
+.btn-danger:hover {
+  background-color: #3a0000 !important;
+  border-color: #3a0000 !important;
+}
